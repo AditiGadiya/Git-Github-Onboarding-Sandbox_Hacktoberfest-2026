@@ -7,7 +7,7 @@ var expenseTotal = document.getElementById("expense-total");
 var emptyMessage = document.getElementById("empty-message");
 var deleteAllBtn=document.getElementById("delete-all");
 // Build one list item for an expense.
-function createExpenseElement(expense, index) {
+function createExpenseElement(expense, index){
   var item = document.createElement("li");
   item.className = "expense-item";
   item.append(createExpenseDetails(expense), createDeleteButton(index));
@@ -55,6 +55,7 @@ function renderExpenses() {
   });
   expenseTotal.textContent = formatAmount(calculateTotal());
   emptyMessage.hidden = expenses.length > 0;
+  deleteAllBtn.hidden = expenses.length === 0;
 }
 
 // Add a new expense from the form inputs.
