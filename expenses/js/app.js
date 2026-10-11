@@ -57,7 +57,7 @@ function renderExpenses() {
   expenseTotal.textContent = formatAmount(calculateTotal());
   var count= expenses.length;
   expenseCount.textContent=
-  count+(count===1?"expense":"expenses");
+  count+(count===1?" expense":" expenses");
   emptyMessage.hidden = expenses.length > 0;
 }
 
