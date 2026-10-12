@@ -4,6 +4,7 @@ var descriptionInput = document.getElementById("expense-description");
 var amountInput = document.getElementById("expense-amount");
 var expenseList = document.getElementById("expense-list");
 var expenseTotal = document.getElementById("expense-total");
+var expenseCount = document.getElementById("expense-count");
 var emptyMessage = document.getElementById("empty-message");
 
 // Build one list item for an expense.
@@ -47,13 +48,16 @@ function calculateTotal() {
   }, 0);
 }
 
-// Draw expenses, total, and the empty state.
+// Draw expenses, total, count and the empty state.
 function renderExpenses() {
   expenseList.innerHTML = "";
   expenses.forEach(function (expense, index) {
     expenseList.appendChild(createExpenseElement(expense, index));
   });
   expenseTotal.textContent = formatAmount(calculateTotal());
+  var count= expenses.length;
+  expenseCount.textContent=
+  count+(count===1?" expense":" expenses");
   emptyMessage.hidden = expenses.length > 0;
 }
 
