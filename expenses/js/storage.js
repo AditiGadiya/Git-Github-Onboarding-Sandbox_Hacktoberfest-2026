@@ -8,3 +8,4 @@ function loadExpenses() {
 function saveExpenses(expenses) {
   localStorage.setItem("expenses", JSON.stringify(expenses));
 }
+

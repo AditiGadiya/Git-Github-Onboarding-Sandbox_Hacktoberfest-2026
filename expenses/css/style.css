@@ -176,3 +176,7 @@ button:focus-visible {
     gap: 0.5rem;
   }
 }
+
+#delete-all{
+  float: right;
+}
