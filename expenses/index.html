@@ -18,7 +18,10 @@
       <label for="expense-description">Description</label>
       <input id="expense-description" name="description" type="text" required>
       <label for="expense-amount">Amount</label>
-      <input id="expense-amount" name="amount" type="number" min="0.01" step="0.01" required>
+      <input id="expense-amount" name="amount" type="text" inputmode="decimal" required>
+      <p id="amount-error" role="alert" hidden>
+        Enter an amount greater than 0.
+      </p>
       <button type="submit">Add expense</button>
     </form>
 

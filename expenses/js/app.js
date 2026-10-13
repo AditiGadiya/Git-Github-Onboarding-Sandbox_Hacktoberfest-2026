@@ -2,6 +2,7 @@ var expenses = loadExpenses();
 var expenseForm = document.getElementById("expense-form");
 var descriptionInput = document.getElementById("expense-description");
 var amountInput = document.getElementById("expense-amount");
+var amountError = document.getElementById("amount-error");
 var expenseList = document.getElementById("expense-list");
 var expenseTotal = document.getElementById("expense-total");
 var expenseCount = document.getElementById("expense-count");
@@ -65,10 +66,43 @@ function renderExpenses() {
 function addExpense(event) {
   event.preventDefault();
   var description = descriptionInput.value.trim();
-  var amount = Number(amountInput.value);
-  if (!description || amount <= 0) { return; }
-  expenses.push({ description: description, amount: amount });
-  saveExpenses(expenses);
+  var amountValue = amountInput.value.trim();
+  var amount = Number(amountValue);
+  // Validate the amount before adding or saving an expense.
+    // Validate the amount before adding or saving an expense.
+    if (!description) {
+        amountError.textContent = "Please enter an expense description.";
+        amountError.hidden = false;
+        return; }
+    if (amountValue === "") {
+        amountError.textContent = "Please enter an amount.";
+        amountError.hidden = false;
+        return;}
+    if (!/^\d+(\.\d+)?$/.test(amountValue)) {
+        amountError.textContent = "Please enter a valid number (e.g. 49.50).";
+        amountError.hidden = false;
+        return;}
+    if (!Number.isFinite(amount)) {
+        amountError.textContent = "The amount must be a valid number.";
+        amountError.hidden = false;
+        return;}
+    if (amount < 0) {
+        amountError.textContent = "Negative amounts are not allowed.";
+        amountError.hidden = false;
+        return;}
+    if (amount === 0) {
+        amountError.textContent = "The amount must be greater than zero.";
+        amountError.hidden = false;
+        return;}
+    amountInput.removeAttribute("aria-invalid");
+    expenses.push({
+        description: description,
+        amount: amount
+    });
+    saveExpenses(expenses);
+    // Clear the error only after a successful addition.
+    amountError.hidden = true;
+    amountInput.removeAttribute("aria-invalid");
   expenseForm.reset();
   renderExpenses();
   descriptionInput.focus();
